@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .form-group button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        .resume {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        .resume h2 {
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        .resume-section {
+            margin-bottom: 20px;
+        }
+        .resume-section h3 {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .resume-section p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Resume Platform
+    </header>
+    <div class="container">
+        <h1>履歷表設計</h1>
+        <form id="resumeForm">
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="birthday">生日</label>
+                <input type="date" id="birthday" name="birthday">
+            </div>
+            <div class="form-group">
+                <label for="phone">電話</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="id">身分證字號</label>
+                <input type="text" id="id" name="id">
+            </div>
+            <div class="form-group">
+                <label for="address">地址</label>
+                <input type="text" id="address" name="address">
+            </div>
+            <div class="form-group">
+                <label for="gender">性別</label>
+                <input type="text" id="gender" name="gender">
+            </div>
+            <div class="form-group">
+                <label for="experience">工作經驗</label>
+                <textarea id="experience" name="experience" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="education">學歷</label>
+                <textarea id="education" name="education" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="traits">個人特質</label>
+                <textarea id="traits" name="traits" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="generateResume()">提交</button>
+            </div>
+        </form>
+        <div class="resume" id="resume" style="display: none;">
+            <h2>履歷表</h2>
+            <div class="resume-section">
+                <h3>基本資料</h3>
+                <p><strong>姓名:</strong> <span id="displayName"></span></p>
+                <p><strong>生日:</strong> <span id="displayBirthday"></span></p>
+                <p><strong>電話:</strong> <span id="displayPhone"></span></p>
+                <p><strong>身分證字號:</strong> <span id="displayId"></span></p>
+                <p><strong>地址:</strong> <span id="displayAddress"></span></p>
+                <p><strong>性別:</strong> <span id="displayGender"></span></p>
+            </div>
+            <div class="resume-section">
+                <h3>工作經驗</h3>
+                <p id="displayExperience"></p>
+            </div>
+            <div class="resume-section">
+                <h3>聯絡方式</h3>
+                <p><strong>E-Mail:</strong> <span id="displayEmail"></span></p>
+            </div>
+            <div class="resume-section">
+                <h3>學歷</h3>
+                <p id="displayEducation"></p>
+            </div>
+            <div class="resume-section">
+                <h3>個人特質</h3>
+                <p id="displayTraits"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function generateResume() {
+            document.getElementById('displayName').innerText = document.getElementById('name').value;
+            document.getElementById('displayBirthday').innerText = document.getElementById('birthday').value;
+            document.getElementById('displayPhone').innerText = document.getElementById('phone').value;
+            document.getElementById('displayId').innerText = document.getElementById('id').value;
+            document.getElementById('displayAddress').innerText = document.getElementById('address').value;
+            document.getElementById('displayGender').innerText = document.getElementById('gender').value;
+            document.getElementById('displayExperience').innerText = document.getElementById('experience').value;
+            document.getElementById('displayEmail').innerText = document.getElementById('email').value;
+            document.getElementById('displayEducation').innerText = document.getElementById('education').value;
+            document.getElementById('displayTraits').innerText = document.getElementById('traits').value;
+
+            document.getElementById('resume').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
