@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .form-group button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        .resume {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        .resume h2 {
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        .resume-section {
+            margin-bottom: 20px;
+        }
+        .resume-section h3 {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .resume-section p {
+            margin: 5px 0;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .table th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .avatar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .avatar img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+        .comments {
+            margin-top: 20px;
+        }
+        .comment-section {
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+        .comment-section textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        .comment-section button {
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .comment-section button:hover {
+            background-color: #45a049;
+        }
+        .comment {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Resume Platform
+    </header>
+    <div class="container">
+        <h1>履歷表設計</h1>
+        <form id="resumeForm">
+            <div class="form-group">
+                <label for="avatar">頭像</label>
+                <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewAvatar(event)">
+            </div>
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="birthday">生日</label>
+                <input type="date" id="birthday" name="birthday">
+            </div>
+            <div class="form-group">
+                <label for="phone">電話</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="id">身分證字號</label>
+                <input type="text" id="id" name="id">
+            </div>
+            <div class="form-group">
+                <label for="address">地址</label>
+                <input type="text" id="address" name="address">
+            </div>
+            <div class="form-group">
+                <label for="gender">性別</label>
+                <input type="text" id="gender" name="gender">
+            </div>
+            <div class="form-group">
+                <label for="experience">工作經驗</label>
+                <textarea id="experience" name="experience" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="education">學歷</label>
+                <textarea id="education" name="education" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="traits">個人特質</label>
+                <textarea id="traits" name="traits" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="fontColor">字體顏色</label>
+                <input type="color" id="fontColor" name="fontColor">
+            </div>
+            <div class="form-group">
+                <label for="fontSize">字體大小</label>
+                <input type="number" id="fontSize" name="fontSize" min="10" max="36">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="generateResume()">提交</button>
+            </div>
+        </form>
+        <div class="resume" id="resume" style="display: none;">
+            <h2>履歷表</h2>
+            <div class="avatar" id="avatarDisplay" style="display: none;">
+                <img id="avatarImg" src="" alt="Avatar">
+            </div>
+            <table class="table">
+                <tr>
+                    <th>姓名</th>
+                    <td id="displayName"></td>
+                </tr>
+                <tr>
+                    <th>生日</th>
+                    <td id="displayBirthday"></td>
+                </tr>
+                <tr>
+                    <th>電話</th>
+                    <td id="displayPhone"></td>
+                </tr>
+                <tr>
+                    <th>身分證字號</th>
+                    <td id="displayId"></td>
+                </tr>
+                <tr>
+                    <th>地址</th>
+                    <td id="displayAddress"></td>
+                </tr>
+                <tr>
+                    <th>性別</th>
+                    <td id="displayGender"></td>
+                </tr>
+                <tr>
+                    <th>工作經驗</th>
+                    <td id="displayExperience"></td>
+                </tr>
+                <tr>
+                    <th>E-Mail</th>
+                    <td id="displayEmail"></td>
+                </tr>
+                <tr>
+                    <th>學歷</th>
+                    <td id="displayEducation"></td>
+                </tr>
+                <tr>
+                    <th>個人特質</th>
+                    <td id="displayTraits"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="comments">
+            <h2>建議留言</h2>
+            <div class="comment-section">
+                <textarea id="commentText" rows="3" placeholder="留下您的建議..."></textarea>
+                <button type="button" onclick="addComment()">提交建議</button>
+            </div>
+            <div id="commentsDisplay"></div>
+        </div>
+    </div>
+    <script>
+        function previewAvatar(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('avatarImg');
+                output.src = reader.result;
+                document.getElementById('avatarDisplay').style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function generateResume() {
+            document.getElementById('displayName').innerText = document.getElementById('name').value;
+            document.getElementById('displayBirthday').innerText = document.getElementById('birthday').value;
+            document.getElementById('displayPhone').innerText = document.getElementById('phone').value;
+            document.getElementById('displayId').innerText = document.getElementById('id').value;
+            document.getElementById('displayAddress').innerText = document.getElementById('address').value;
+            document.getElementById('displayGender').innerText = document.getElementById('gender').value;
+            document.getElementById('displayExperience').innerText = document.getElementById('experience').value;
+            document.getElementById('displayEmail').innerText = document.getElementById('email').value;
+            document.getElementById('displayEducation').innerText = document.getElementById('education').value;
+            document.getElementById('displayTraits').innerText = document.getElementById('traits').value;
+
+            var fontColor = document.getElementById('fontColor').value;
+            var fontSize = document.getElementById('fontSize').value;
+            var resume = document.getElementById('resume');
+            resume.style.color = fontColor;
+            resume.style.fontSize = fontSize + 'px';
+
+            resume.style.display = 'block';
+        }
+
+        function addComment() {
+            var commentText = document.getElementById('commentText').value;
+            if(commentText.trim() !== "") {
+                var commentDisplay = document.getElementById('commentsDisplay');
+                var newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.innerText = commentText;
+                commentDisplay.appendChild(newComment);
+                document.getElementById('commentText').value = "";
+            }
+        }
+    </script>
+</body>
+</html>
